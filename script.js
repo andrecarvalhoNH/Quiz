@@ -73,12 +73,12 @@ function showQuestion() {
     btn.onclick = () => selectOption(k, btn);
     optionsEl.appendChild(btn);
   });
+  selected = null;
   confirmBtn.disabled = true;
   nextBtn.disabled = true;
 }
 
 function selectOption(opt, btn) {
-  if (confirmBtn.disabled === false) return;
   selected = opt;
   document.querySelectorAll(".option").forEach(el => el.classList.remove("selected"));
   btn.classList.add("selected");
@@ -92,6 +92,7 @@ confirmBtn.onclick = () => {
   document.querySelectorAll(".option").forEach(el => {
     if (el.textContent.startsWith(correct)) el.classList.add("correct");
     if (el.textContent.startsWith(selected) && selected !== correct) el.classList.add("wrong");
+    el.style.pointerEvents = "none";
   });
   if (selected === correct) score++;
   confirmBtn.disabled = true;
